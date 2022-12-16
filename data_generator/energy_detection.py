@@ -165,16 +165,18 @@ if __name__ == "__main__":
     full_df.set_index("index")
     full_df.to_pickle(out_dir + "/info_df.pkl")
 
-    if n_coarse_chans == header['nchans']/coarse_channel_width:
+    if n_coarse_chans == header['nchans']//coarse_channel_width:
         filtered_df = filter_images(full_df.reset_index(), 4)
         filtered_stack = np.array([])
-
+        print(filtered_df)
+    
     if stack_list:
+        print(header['nchans']//coarse_channel_width, n_coarse_chans)
         full_stack = np.concatenate(stack_list)
         filtered_stack = full_stack[filtered_df.index.values]
 
         np.save(out_dir + "/filtered.npy", full_stack)
-        if n_coarse_chans == header['nchans']/coarse_channel_width:
+        if n_coarse_chans == header['nchans']//coarse_channel_width:
             np.save(out_dir + "/best_hits.npy", filtered_stack)
 
     g_end = time()
