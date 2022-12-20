@@ -19,7 +19,7 @@ import os
 # Hyperparameters
 coarse_channel_width = 2 ** 20
 threshold = 1e-80
-stat_threshold = 2048
+stat_threshold = 256
 save_png = False
 save_npy = True
 
